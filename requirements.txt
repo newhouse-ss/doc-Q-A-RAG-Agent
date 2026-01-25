@@ -1,0 +1,17 @@
+langchain
+langchain-community
+langchain-core
+langchain-google-genai
+langchain-text-splitters
+langgraph
+pydantic
+tiktoken
+fastapi
+uvicorn
+pypdf
+beautifulsoup4
+ragas
+datasets
+matplotlib
+seaborn
+slowapi

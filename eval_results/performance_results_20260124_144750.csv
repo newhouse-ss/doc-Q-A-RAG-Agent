@@ -1,0 +1,31 @@
+question_id,question,total_latency,estimated_tokens,success,hit@1,recall@1,hit@3,recall@3,hit@5,recall@5,mrr
+1,What is the primary mechanism of action of metformin in treating type 2 diabetes?,8.07244348526001,3711,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+2,What are two defining features of type 2 diabetes compared with type 1 diabetes?,9.057379007339478,3681,True,,,,,,,
+3,"What is the major dose-limiting toxicity associated with anthracyclines, and why is it clinically im",6.307246923446655,3911,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+4,"What is chemotherapy in oncology, and what is its general therapeutic goal?",6.802004814147949,3420,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+5,What is CRISPR and what are its two key components in CRISPR-Cas9 genome editing?,7.561268329620361,3449,True,1.0,0.5,1.0,1.0,1.0,1.0,1.0
+6,"After Cas9 makes a double-strand break during CRISPR gene editing, what are the two main DNA repair ",8.318450689315796,3519,True,,,,,,,
+7,How do ACE inhibitors lower blood pressure and reduce cardiac workload?,6.513274192810059,3862,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+8,What is the physiological role of angiotensin-converting enzyme (ACE) in the renin–angiotensin syste,5.911270618438721,3343,True,0.0,0.0,1.0,1.0,1.0,1.0,0.5
+9,"What are three major components of innate immunity that provide rapid, non-specific defense?",9.638992547988892,4107,True,0.0,0.0,1.0,1.0,1.0,1.0,0.5
+10,What is immunological memory and which arm of the immune system is primarily responsible for it?,9.496378183364868,3402,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+11,How do innate and adaptive immunity work together during an infection?,8.102155923843384,4415,True,,,,,,,
+12,What are the two major pathological hallmarks of Alzheimer's disease at the molecular level?,6.169313430786133,3564,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+13,What is amyloid-beta and what is its relevance to Alzheimer's disease?,6.0895164012908936,3297,True,0.0,0.0,1.0,0.5,1.0,0.5,0.5
+14,What is tau protein’s normal cellular role and how does it relate to neurofibrillary tangles?,8.386717319488525,3517,True,0.0,0.0,1.0,1.0,1.0,1.0,0.5
+15,How do mRNA vaccines induce an immune response without using live pathogen?,7.089755296707153,3675,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+16,What is messenger RNA (mRNA) in the central dogma of molecular biology?,5.993860960006714,3529,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+17,Name four common mechanisms by which bacteria resist antibiotics.,5.307890892028809,3628,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+18,What is an efflux pump and how can it contribute to antimicrobial resistance?,6.85696268081665,3654,True,0.0,0.0,1.0,1.0,1.0,1.0,0.5
+19,What structures form the blood–brain barrier and why is it important?,6.843100547790527,3414,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+20,What are hallmark cellular features of apoptosis?,6.8845696449279785,3004,True,0.0,0.0,1.0,1.0,1.0,1.0,0.5
+21,How does necrosis differ from apoptosis in terms of mechanism and inflammatory outcome?,6.229756832122803,2964,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+22,"What does 'programmed cell death' mean, and which is the best-known example?",6.710566282272339,3445,True,0.0,0.0,1.0,1.0,1.0,1.0,0.5
+23,How does insulin lower blood glucose in muscle and adipose tissue?,6.346008777618408,3900,True,0.0,0.0,1.0,1.0,1.0,1.0,0.3333333333333333
+24,"Besides insulin, which hormone counter-regulates blood glucose and what is its primary effect in the",10.360071897506714,3685,True,,,,,,,
+25,What are monoclonal antibodies and why are they useful therapeutically?,14.869343042373657,3285,True,1.0,0.5,1.0,0.5,1.0,0.5,1.0
+26,"What is cancer immunotherapy, and name two broad strategies it uses?",8.546375513076782,3728,True,1.0,0.5,1.0,1.0,1.0,1.0,1.0
+27,What is a beta-lactamase and how does it confer antibiotic resistance?,6.49561333656311,3374,True,1.0,0.5,1.0,1.0,1.0,1.0,1.0
+28,What is the principle of PCR and what does it amplify?,6.888126373291016,3331,True,,,,,,,
+29,What is next-generation sequencing (NGS) in contrast to traditional Sanger sequencing?,8.611215829849243,4147,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+30,What is ELISA and what is it commonly used to detect?,6.8416643142700195,2908,True,0.0,0.0,1.0,1.0,1.0,1.0,0.3333333333333333

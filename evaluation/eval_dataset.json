@@ -1,0 +1,323 @@
+[
+  {
+    "question": "What is the primary mechanism of action of metformin in treating type 2 diabetes?",
+    "ground_truth": "Metformin primarily lowers blood glucose by reducing hepatic glucose production (gluconeogenesis) and improving insulin sensitivity in peripheral tissues; it is commonly associated with AMPK-related pathways that decrease liver glucose output and increase peripheral glucose uptake.",
+    "context": [
+      "Metformin is widely used as a first-line medication for type 2 diabetes and primarily decreases hepatic glucose production, especially gluconeogenesis.",
+      "Metformin also improves insulin sensitivity and increases peripheral glucose uptake, contributing to improved glycemic control."
+    ],
+    "gold_doc_ids": [
+      "7"
+    ]
+  },
+  {
+    "question": "What are two defining features of type 2 diabetes compared with type 1 diabetes?",
+    "ground_truth": "Type 2 diabetes is characterized primarily by insulin resistance and progressive beta-cell dysfunction leading to relative insulin deficiency, whereas type 1 diabetes is primarily autoimmune destruction of beta cells causing absolute insulin deficiency.",
+    "context": [
+      "Type 2 diabetes is commonly associated with insulin resistance, where cells respond less effectively to insulin.",
+      "Over time, beta-cell function may decline in type 2 diabetes, leading to insufficient insulin secretion relative to demand."
+    ]
+  },
+  {
+    "question": "What is the major dose-limiting toxicity associated with anthracyclines, and why is it clinically important?",
+    "ground_truth": "A major dose-limiting toxicity of anthracyclines is cardiotoxicity, which is clinically important because it is related to cumulative dose and can lead to cardiomyopathy and heart failure.",
+    "context": [
+      "Anthracyclines such as doxorubicin are effective anticancer agents but are associated with significant cardiotoxicity risk.",
+      "Cardiotoxicity is related to cumulative exposure and can manifest as cardiomyopathy and congestive heart failure."
+    ],
+    "gold_doc_ids": [
+      "67"
+    ]
+  },
+  {
+    "question": "What is chemotherapy in oncology, and what is its general therapeutic goal?",
+    "ground_truth": "Chemotherapy refers to the use of cytotoxic or anti-proliferative drugs to treat cancer, aiming to kill rapidly dividing cells, reduce tumor burden, and achieve remission or cure, often as part of combination therapy.",
+    "context": [
+      "Chemotherapy uses drugs that target rapidly dividing cells and is commonly used to treat cancer, sometimes in combination with surgery or radiation.",
+      "Depending on the setting, chemotherapy can be curative, adjuvant (to reduce recurrence risk), or palliative (to relieve symptoms and prolong survival)."
+    ],
+    "gold_doc_ids": [
+      "82"
+    ]
+  },
+  {
+    "question": "What is CRISPR and what are its two key components in CRISPR-Cas9 genome editing?",
+    "ground_truth": "CRISPR refers to a bacterial adaptive immune system component repurposed for genome editing; in CRISPR-Cas9 editing, a guide RNA (gRNA) directs the Cas9 nuclease to a specific DNA sequence where Cas9 introduces a double-strand break.",
+    "context": [
+      "CRISPR-associated systems involve RNA-guided nucleases; in the common CRISPR-Cas9 system, a guide RNA specifies the target DNA sequence.",
+      "Cas9 functions as an endonuclease that cuts DNA at the targeted site, enabling downstream DNA repair outcomes."
+    ],
+    "gold_doc_ids": [
+      "129",
+      "165"
+    ]
+  },
+  {
+    "question": "After Cas9 makes a double-strand break during CRISPR gene editing, what are the two main DNA repair pathways and typical outcomes?",
+    "ground_truth": "Cells primarily repair Cas9-induced double-strand breaks via non-homologous end joining (NHEJ), which often introduces insertions/deletions causing gene disruption, or homology-directed repair (HDR), which can introduce precise edits using a donor template.",
+    "context": [
+      "Following a double-strand break, non-homologous end joining (NHEJ) can rejoin DNA ends and frequently introduces small insertions or deletions.",
+      "Homology-directed repair (HDR) can incorporate a provided DNA template to introduce specific sequence changes at the cut site."
+    ]
+  },
+  {
+    "question": "How do ACE inhibitors lower blood pressure and reduce cardiac workload?",
+    "ground_truth": "ACE inhibitors block angiotensin-converting enzyme, decreasing angiotensin II formation and aldosterone secretion; this reduces vasoconstriction and fluid retention, lowering blood pressure and cardiac afterload.",
+    "context": [
+      "ACE inhibitors reduce the conversion of angiotensin I to angiotensin II, decreasing vasoconstriction and lowering blood pressure.",
+      "They also decrease aldosterone-mediated sodium and water retention, which can reduce blood volume and cardiac workload."
+    ],
+    "gold_doc_ids": [
+      "211"
+    ]
+  },
+  {
+    "question": "What is the physiological role of angiotensin-converting enzyme (ACE) in the renin–angiotensin system?",
+    "ground_truth": "ACE converts angiotensin I to angiotensin II, a potent vasoconstrictor that increases blood pressure and stimulates aldosterone secretion; ACE also degrades bradykinin, influencing vascular tone.",
+    "context": [
+      "Angiotensin-converting enzyme converts angiotensin I into angiotensin II, which promotes vasoconstriction and elevates blood pressure.",
+      "ACE is also involved in bradykinin degradation, and changes in bradykinin levels can affect vascular effects."
+    ],
+    "gold_doc_ids": [
+      "232"
+    ]
+  },
+  {
+    "question": "What are three major components of innate immunity that provide rapid, non-specific defense?",
+    "ground_truth": "Innate immunity provides rapid, non-specific defense via physical barriers (e.g., skin/mucosa), cellular defenses (e.g., phagocytes like macrophages and neutrophils), and soluble mediators (e.g., complement and inflammatory cytokines).",
+    "context": [
+      "Innate immunity acts quickly and includes physical barriers such as skin and mucosal surfaces that block pathogen entry.",
+      "It also involves phagocytic cells and soluble factors like complement that recognize and respond to common pathogen features."
+    ],
+    "gold_doc_ids": [
+      "279",
+      "246"
+    ]
+  },
+  {
+    "question": "What is immunological memory and which arm of the immune system is primarily responsible for it?",
+    "ground_truth": "Immunological memory is the ability to mount a faster and stronger response upon re-exposure to a specific antigen, primarily mediated by adaptive immunity through memory B and T lymphocytes.",
+    "context": [
+      "Adaptive immunity is antigen-specific and includes B and T lymphocytes that recognize specific targets.",
+      "A hallmark of adaptive immunity is immunological memory, enabling enhanced responses to previously encountered pathogens."
+    ],
+    "gold_doc_ids": [
+      "283"
+    ]
+  },
+  {
+    "question": "How do innate and adaptive immunity work together during an infection?",
+    "ground_truth": "Innate immunity provides immediate containment and antigen presentation signals, while adaptive immunity generates antigen-specific T and B cell responses; innate responses shape and activate adaptive responses, and adaptive immunity enhances pathogen clearance and provides memory.",
+    "context": [
+      "Innate immune responses occur early and can produce inflammatory signals and antigen presentation that help activate adaptive immunity.",
+      "Adaptive immune responses are more specific and can amplify clearance through antibodies and cytotoxic T cells, leaving memory cells afterward."
+    ]
+  },
+  {
+    "question": "What are the two major pathological hallmarks of Alzheimer's disease at the molecular level?",
+    "ground_truth": "Alzheimer's disease is characterized by extracellular amyloid-beta plaques and intracellular neurofibrillary tangles composed of hyperphosphorylated tau protein, contributing to synaptic dysfunction and neurodegeneration.",
+    "context": [
+      "Alzheimer's disease is associated with amyloid-beta accumulation forming plaques between neurons.",
+      "It is also characterized by neurofibrillary tangles composed largely of hyperphosphorylated tau protein inside neurons."
+    ],
+    "gold_doc_ids": [
+      "317"
+    ]
+  },
+  {
+    "question": "What is amyloid-beta and what is its relevance to Alzheimer's disease?",
+    "ground_truth": "Amyloid-beta is a peptide derived from amyloid precursor protein (APP); its aggregation is associated with plaque formation and is implicated in synaptic dysfunction and neuroinflammatory processes in Alzheimer's disease.",
+    "context": [
+      "Amyloid-beta peptides can aggregate and are a major component of amyloid plaques found in brains affected by Alzheimer's disease.",
+      "Amyloid-beta accumulation is linked to neuronal dysfunction and inflammatory responses that contribute to disease pathology."
+    ],
+    "gold_doc_ids": [
+      "360",
+      "361"
+    ]
+  },
+  {
+    "question": "What is tau protein’s normal cellular role and how does it relate to neurofibrillary tangles?",
+    "ground_truth": "Tau is a microtubule-associated protein that stabilizes microtubules in neurons; abnormal hyperphosphorylation can cause tau to detach and aggregate into neurofibrillary tangles, disrupting intracellular transport.",
+    "context": [
+      "Tau protein normally binds microtubules and helps stabilize them, supporting neuronal structure and transport.",
+      "In disease states, tau can become abnormally modified and form aggregates that are associated with neurofibrillary tangles."
+    ],
+    "gold_doc_ids": [
+      "375"
+    ]
+  },
+  {
+    "question": "How do mRNA vaccines induce an immune response without using live pathogen?",
+    "ground_truth": "mRNA vaccines deliver mRNA encoding an antigen (e.g., a viral surface protein) into cells, which translate it into protein; the antigen is then presented to the immune system, eliciting antibody and T cell responses and generating memory without exposure to live pathogen.",
+    "context": [
+      "mRNA vaccines use delivered mRNA as instructions for cells to produce a specific antigen protein.",
+      "The produced antigen triggers immune recognition and can induce both antibody responses and immunological memory."
+    ],
+    "gold_doc_ids": [
+      "394"
+    ]
+  },
+  {
+    "question": "What is messenger RNA (mRNA) in the central dogma of molecular biology?",
+    "ground_truth": "mRNA is an RNA molecule transcribed from DNA that carries coding information to ribosomes, where it serves as the template for protein synthesis during translation.",
+    "context": [
+      "Messenger RNA is produced by transcription of DNA and carries genetic information from the nucleus (or nucleoid) to the ribosome.",
+      "Ribosomes translate mRNA sequences into amino acid chains, producing proteins."
+    ],
+    "gold_doc_ids": [
+      "425"
+    ]
+  },
+  {
+    "question": "Name four common mechanisms by which bacteria resist antibiotics.",
+    "ground_truth": "Common antibiotic resistance mechanisms include enzymatic drug inactivation (e.g., beta-lactamases), target modification, reduced permeability/uptake, and active efflux pumps that expel drugs from the cell; resistance can arise via mutation or horizontal gene transfer.",
+    "context": [
+      "Bacteria can resist antibiotics by destroying or modifying the drug, changing the drug’s target, reducing drug entry, or pumping the drug out of the cell.",
+      "Resistance traits can spread through mutations and horizontal gene transfer such as plasmids, increasing the prevalence of resistant strains."
+    ],
+    "gold_doc_ids": [
+      "457"
+    ]
+  },
+  {
+    "question": "What is an efflux pump and how can it contribute to antimicrobial resistance?",
+    "ground_truth": "An efflux pump is a membrane transport system that exports substances out of cells; in bacteria, efflux pumps can reduce intracellular antibiotic concentrations, thereby lowering drug efficacy and contributing to resistance.",
+    "context": [
+      "Efflux pumps are membrane proteins that transport compounds out of cells using energy-dependent mechanisms.",
+      "In bacteria, efflux pumps can export antibiotics, decreasing intracellular drug concentration and enabling survival under antibiotic exposure."
+    ],
+    "gold_doc_ids": [
+      "497"
+    ]
+  },
+  {
+    "question": "What structures form the blood–brain barrier and why is it important?",
+    "ground_truth": "The blood–brain barrier is formed primarily by brain endothelial cells with tight junctions, supported by pericytes and astrocytic end-feet; it maintains CNS homeostasis by restricting entry of toxins/pathogens while allowing regulated transport of essential nutrients.",
+    "context": [
+      "The blood–brain barrier involves specialized endothelial cells connected by tight junctions that restrict paracellular transport.",
+      "It selectively permits essential molecules while limiting many toxins, pathogens, and drugs, helping maintain a stable neural environment."
+    ],
+    "gold_doc_ids": [
+      "501"
+    ]
+  },
+  {
+    "question": "What are hallmark cellular features of apoptosis?",
+    "ground_truth": "Apoptosis is programmed cell death characterized by cell shrinkage, chromatin condensation, DNA fragmentation, membrane blebbing, and formation of apoptotic bodies that are cleared by phagocytes with minimal inflammation.",
+    "context": [
+      "Apoptosis is a regulated process in which cells undergo an orderly dismantling, including nuclear condensation and DNA fragmentation.",
+      "Apoptotic bodies are formed and removed by phagocytic cells, typically without provoking an inflammatory response."
+    ],
+    "gold_doc_ids": [
+      "516"
+    ]
+  },
+  {
+    "question": "How does necrosis differ from apoptosis in terms of mechanism and inflammatory outcome?",
+    "ground_truth": "Necrosis is an uncontrolled or injury-associated cell death often involving cell swelling and membrane rupture, releasing intracellular contents and triggering inflammation; apoptosis is controlled, energy-dependent, and usually non-inflammatory due to contained cell dismantling and clearance.",
+    "context": [
+      "Necrosis commonly involves loss of membrane integrity and release of cellular contents into surrounding tissue, which can provoke inflammation.",
+      "Apoptosis is generally controlled and involves packaging of cellular components for clean removal, limiting inflammatory signaling."
+    ],
+    "gold_doc_ids": [
+      "538"
+    ]
+  },
+  {
+    "question": "What does 'programmed cell death' mean, and which is the best-known example?",
+    "ground_truth": "Programmed cell death refers to genetically regulated mechanisms leading to cell elimination as part of normal development or homeostasis; apoptosis is the best-known and most widely described programmed cell death pathway.",
+    "context": [
+      "Programmed cell death denotes regulated cellular processes that lead to cell death in a controlled manner, often serving physiological roles.",
+      "Apoptosis is a prototypical programmed cell death pathway, distinct from accidental injury-driven cell death."
+    ],
+    "gold_doc_ids": [
+      "548"
+    ]
+  },
+  {
+    "question": "How does insulin lower blood glucose in muscle and adipose tissue?",
+    "ground_truth": "Insulin binds to insulin receptors and promotes translocation of GLUT4 transporters to the cell membrane in muscle and adipose tissue, increasing glucose uptake; it also supports glycogen synthesis and inhibits glucose production pathways.",
+    "context": [
+      "Insulin signaling can increase glucose uptake in muscle and fat cells by promoting GLUT4 transporter translocation to the cell surface.",
+      "Insulin also influences metabolism by promoting storage pathways such as glycogen synthesis and reducing endogenous glucose production."
+    ],
+    "gold_doc_ids": [
+      "578"
+    ]
+  },
+  {
+    "question": "Besides insulin, which hormone counter-regulates blood glucose and what is its primary effect in the liver?",
+    "ground_truth": "Glucagon counter-regulates blood glucose; in the liver it promotes glycogenolysis and gluconeogenesis, increasing glucose release into the bloodstream, especially during fasting.",
+    "context": [
+      "Blood glucose regulation involves multiple hormones; insulin generally lowers blood glucose, while counter-regulatory hormones raise it during fasting or stress.",
+      "Glucagon primarily acts on the liver to increase glucose availability through glycogen breakdown and gluconeogenesis."
+    ]
+  },
+  {
+    "question": "What are monoclonal antibodies and why are they useful therapeutically?",
+    "ground_truth": "Monoclonal antibodies are laboratory-produced antibodies derived from a single clone and engineered to bind a specific antigen; they are therapeutically useful because of their high specificity for targets, enabling targeted cancer therapy, immune modulation in autoimmune disease, and pathogen neutralization.",
+    "context": [
+      "Monoclonal antibodies are identical antibodies that bind a single epitope, produced using standardized manufacturing approaches.",
+      "Their target specificity enables applications such as blocking signaling pathways, marking cells for immune attack, or neutralizing pathogens."
+    ],
+    "gold_doc_ids": [
+      "618",
+      "614"
+    ]
+  },
+  {
+    "question": "What is cancer immunotherapy, and name two broad strategies it uses?",
+    "ground_truth": "Cancer immunotherapy uses the immune system to fight cancer; broad strategies include immune checkpoint blockade (e.g., PD-1/CTLA-4 pathway inhibition) and adoptive cell therapies (e.g., engineered T cells), as well as cytokines and therapeutic antibodies.",
+    "context": [
+      "Immunotherapy aims to harness or enhance immune responses to recognize and eliminate cancer cells.",
+      "Approaches include checkpoint inhibition that relieves immune suppression and cellular therapies that provide or modify anti-tumor immune cells."
+    ],
+    "gold_doc_ids": [
+      "633",
+      "634"
+    ]
+  },
+  {
+    "question": "What is a beta-lactamase and how does it confer antibiotic resistance?",
+    "ground_truth": "Beta-lactamases are bacterial enzymes that hydrolyze the beta-lactam ring of beta-lactam antibiotics (e.g., penicillins/cephalosporins), inactivating the drug and conferring resistance; some are extended-spectrum or carbapenem-hydrolyzing variants.",
+    "context": [
+      "Beta-lactamases are enzymes produced by many bacteria that can inactivate beta-lactam antibiotics by breaking a key chemical bond in the beta-lactam ring.",
+      "By destroying the antibiotic’s active structure, beta-lactamases reduce drug effectiveness and allow bacterial survival."
+    ],
+    "gold_doc_ids": [
+      "653",
+      "654"
+    ]
+  },
+  {
+    "question": "What is the principle of PCR and what does it amplify?",
+    "ground_truth": "PCR (polymerase chain reaction) amplifies a specific DNA segment through repeated cycles of denaturation, primer annealing, and extension by a DNA polymerase, generating exponential copies of the target region defined by primers.",
+    "context": [
+      "PCR uses temperature cycling to separate DNA strands, bind primers to target sequences, and extend primers with a DNA polymerase.",
+      "Through repeated cycles, the amount of DNA between primers increases exponentially, enabling sensitive detection and downstream analysis."
+    ]
+  },
+  {
+    "question": "What is next-generation sequencing (NGS) in contrast to traditional Sanger sequencing?",
+    "ground_truth": "NGS refers to high-throughput sequencing technologies that perform massively parallel sequencing, producing large numbers of reads simultaneously; compared with Sanger sequencing, NGS scales throughput dramatically and enables whole-genome, exome, and transcriptome sequencing at lower cost per base.",
+    "context": [
+      "Next-generation sequencing uses parallelized sequencing reactions to generate many short reads in a single run, enabling high throughput.",
+      "Compared with Sanger sequencing, NGS is designed for large-scale sequencing applications such as whole-genome and transcriptome profiling."
+    ],
+    "gold_doc_ids": [
+      "694"
+    ]
+  },
+  {
+    "question": "What is ELISA and what is it commonly used to detect?",
+    "ground_truth": "ELISA (enzyme-linked immunosorbent assay) is an antibody-based assay that uses enzyme-conjugated detection to generate a measurable signal; it is commonly used to detect or quantify antigens (e.g., proteins) or antibodies in biological samples.",
+    "context": [
+      "ELISA is an immunoassay that relies on specific antigen–antibody binding and an enzyme-linked readout that produces a detectable signal.",
+      "It is widely used in diagnostics and research to measure antigen or antibody concentrations in samples such as blood or serum."
+    ],
+    "gold_doc_ids": [
+      "704"
+    ]
+  }
+]
