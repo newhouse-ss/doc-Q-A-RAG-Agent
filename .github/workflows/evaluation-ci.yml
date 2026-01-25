@@ -35,7 +35,7 @@ jobs:
     
     - name: Upload evaluation results
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: evaluation-results
         path: evaluation/eval_results/
