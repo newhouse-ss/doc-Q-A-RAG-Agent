@@ -3,7 +3,8 @@ from pathlib import Path
 from typing import List
 
 # model selection
-EMBEDDING_MODEL_NAME = "models/text-embedding-004"
+EMBEDDING_MODEL_NAME = "models/gemini-embedding-001"
+EMBEDDING_DIM = 768  # reduced from 3072 via output_dimensionality (pgvector index limit: 2000)
 LLM_MODEL_NAME = "gemini-2.5-flash"
 
 # document processing configuration

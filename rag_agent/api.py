@@ -5,19 +5,15 @@ import uuid
 from contextlib import asynccontextmanager
 from typing import Any, List, Optional
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
-from slowapi.errors import RateLimitExceeded
 
 from rag_agent.config import ensure_google_api_key
 from rag_agent.graph_builder import build_graph
+from rag_agent.models import get_embeddings_model
+from rag_agent.cache import SemanticCache
 
 logger = logging.getLogger("uvicorn.error")
-
-# Create rate limiter
-limiter = Limiter(key_func=get_remote_address)
 
 
 class ChatRequest(BaseModel):
@@ -37,6 +33,7 @@ class ChatResponse(BaseModel):
     trace_id: str
     answer: str
     citations: List[Citation] = Field(default_factory=list)
+    cached: bool = False
 
 
 def _extract_text(content: Any) -> str:
@@ -113,13 +110,16 @@ def _collect_last_citations(messages: list) -> List[Citation]:
 async def lifespan(app: FastAPI):
     ensure_google_api_key()
     app.state.graph = await asyncio.to_thread(build_graph)
-    app.state.limiter = limiter
+    app.state.cache = SemanticCache(
+        embeddings_model=get_embeddings_model(),
+        similarity_threshold=0.92,
+        ttl_seconds=3600,
+    )
+    logger.info("Semantic cache initialised  threshold=0.92  ttl=3600s")
     yield
 
 
-app = FastAPI(title="Hybrid RAG Agent API", version="1.4.0", lifespan=lifespan)
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app = FastAPI(title="Citation-grounded RAG Agent", version="2.0.0", lifespan=lifespan)
 
 
 @app.get("/healthz")
@@ -127,10 +127,31 @@ def healthz():
     return {"status": "ok"}
 
 
+@app.get("/v1/cache/stats")
+def cache_stats():
+    return {"entries": app.state.cache.size}
+
+
+@app.delete("/v1/cache")
+def cache_clear():
+    app.state.cache.clear()
+    return {"status": "cleared"}
+
+
 @app.post("/v1/chat", response_model=ChatResponse, response_model_exclude_none=True)
-@limiter.limit("10/minute")
-async def chat(request: Request, req: ChatRequest):
+async def chat(req: ChatRequest):
     trace_id = str(uuid.uuid4())
+
+    # --- semantic cache lookup ---
+    hit = app.state.cache.get(req.message)
+    if hit is not None:
+        answer, cached_citations = hit
+        citations = [Citation(**c) if isinstance(c, dict) else c for c in cached_citations]
+        return ChatResponse(
+            trace_id=trace_id, answer=answer, citations=citations, cached=True
+        )
+
+    # --- cache miss: run the full agent graph ---
     initial_state = {"messages": [{"role": "user", "content": req.message}]}
 
     try:
@@ -143,6 +164,13 @@ async def chat(request: Request, req: ChatRequest):
 
         last = messages[-1] if messages else ""
         answer = _extract_text(getattr(last, "content", last))
+
+        # store in cache
+        app.state.cache.put(
+            query=req.message,
+            answer=answer,
+            citations=[c.model_dump() for c in citations],
+        )
 
         return ChatResponse(trace_id=trace_id, answer=answer, citations=citations)
 

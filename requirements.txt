@@ -1,3 +1,4 @@
+# Core RAG engine
 langchain
 langchain-community
 langchain-core
@@ -6,12 +7,33 @@ langchain-text-splitters
 langgraph
 pydantic
 tiktoken
-fastapi
-uvicorn
+
+# Document loading
 pypdf
 beautifulsoup4
+requests
+
+# API service
+fastapi
+uvicorn
+
+# PostgreSQL / pgvector query layer
+psycopg[binary]
+
+# Semantic caching
+numpy
+
+# Streamlit dashboard
+streamlit
+
+# Evaluation
 ragas
 datasets
-matplotlib
-seaborn
-slowapi
+pandas
+
+# AWS helpers (scripts/)
+boto3
+
+# ETL local runner (optional)
+# google-generativeai
+# psycopg2-binary

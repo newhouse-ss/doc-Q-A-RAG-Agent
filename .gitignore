@@ -1,1 +1,16 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.env
+.vscode/
+.idea/
 *.mp4
+*.pdf
+cdk.out/
+node_modules/
+.streamlit/
+/AWS_keys.txt
+*.pyc

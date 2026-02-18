@@ -1,0 +1,19 @@
+Building LLM-Powered Autonomous Agents
+
+Large language models (LLMs) can be used as the core controller of autonomous agents. These agents combine planning, memory, and tool use to solve complex tasks. The concept of an AI agent extends beyond simple text generation to encompass systems that can reason, plan, and take actions in their environment.
+
+Planning and Task Decomposition
+
+A key capability of AI agents is task decomposition. Chain of Thought (CoT) prompting enables models to break down complex problems into smaller, manageable steps. Tree of Thoughts extends this by exploring multiple reasoning paths at each step, creating a tree structure that can be searched using BFS or DFS strategies. Task decomposition can be done through simple prompting, task-specific instructions, or with human input.
+
+Memory Systems
+
+Agents utilize both short-term and long-term memory. Short-term memory includes the context window of the LLM, while long-term memory leverages external vector stores for information retrieval. Maximum Inner Product Search (MIPS) algorithms enable efficient retrieval from large vector databases. Common implementations include FAISS, ScaNN, and Annoy libraries.
+
+Tool Use and Integration
+
+Modern AI agents can leverage external tools and APIs to extend their capabilities. This includes web search, code execution, mathematical computation, and database queries. The MRKL system architecture demonstrates how LLMs can be paired with expert modules for specialized tasks. Tool use allows agents to overcome limitations of the base model, such as arithmetic errors or lack of current information.
+
+Retrieval-Augmented Generation
+
+RAG combines the generative capabilities of LLMs with information retrieval systems. Documents are chunked, embedded into vector representations, and stored in vector databases. At query time, relevant chunks are retrieved and provided as context to the LLM. This approach grounds the model's responses in factual data, reducing hallucination and enabling citation of sources.

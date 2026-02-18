@@ -3,8 +3,6 @@ from __future__ import annotations
 from functools import partial
 from langgraph.graph import StateGraph, START, END, MessagesState
 from langgraph.prebuilt import ToolNode, tools_condition
-from langchain_core.caches import InMemoryCache
-from langchain_core.globals import set_llm_cache
 
 from rag_agent.models import get_llm_model
 from rag_agent.vectorstore import build_vectorstore
@@ -18,7 +16,6 @@ from rag_agent.nodes import (
 
 
 def build_graph(urls: list[str] | None = None):
-    set_llm_cache(InMemoryCache())
     print("Building Vector Store...")
     vectorstore = build_vectorstore(urls=urls)
 
