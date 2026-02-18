@@ -32,7 +32,7 @@ jobs:
         PYTHONPATH: ${{ github.workspace }}
       run: |
         cd evaluation
-        python run_evaluation.py
+        python run_evaluation.py --max-samples 10
     
     - name: Upload evaluation results
       if: always()

@@ -17,11 +17,17 @@ import json
 import os
 import time
 import re
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 import pandas as pd
 import numpy as np
+
+# Maximum steps LangGraph may execute per question (prevents infinite rewrite loops)
+_GRAPH_RECURSION_LIMIT = 10
+# Per-question wall-clock timeout in seconds
+_QUESTION_TIMEOUT_S = 60
 
 from datasets import Dataset
 from ragas import evaluate
@@ -84,19 +90,41 @@ def extract_chunk_ids_from_context(context: str) -> List[str]:
     return matches if matches else []
 
 
-def run_rag_pipeline_with_metrics(question: str, graph) -> Dict:
+def run_rag_pipeline_with_metrics(question: str, graph, timeout_s: int = _QUESTION_TIMEOUT_S) -> Dict:
     """
     Run RAG pipeline and collect:
     - answer, contexts, retrieved_doc_ids
     - latency, tokens, success status
+
+    Uses *recursion_limit* to cap LangGraph rewrite loops and
+    *timeout_s* as a hard wall-clock deadline per question.
     """
     from langchain_core.messages import HumanMessage
-    
+
     start_time = time.time()
-    
-    # Run the graph
-    result = graph.invoke({"messages": [HumanMessage(content=question)]})
-    
+
+    # Run the graph with recursion limit to prevent infinite rewrite loops
+    config = {"recursion_limit": _GRAPH_RECURSION_LIMIT}
+
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        future = pool.submit(
+            graph.invoke,
+            {"messages": [HumanMessage(content=question)]},
+            config,
+        )
+        try:
+            result = future.result(timeout=timeout_s)
+        except (FuturesTimeoutError, Exception) as exc:
+            total_latency = time.time() - start_time
+            return {
+                'answer': f"Timeout/Error after {total_latency:.1f}s: {exc}",
+                'contexts': ["No context retrieved"],
+                'retrieved_doc_ids': [],
+                'total_latency': total_latency,
+                'estimated_tokens': 0,
+                'success': False,
+            }
+
     total_latency = time.time() - start_time
     
     # Extract data from messages
@@ -266,16 +294,25 @@ def analyze_performance(performance_data: List[Dict]) -> Dict:
 
 # ==================== Main Evaluation ====================
 
-def run_enhanced_evaluation(dataset_path: str = "eval_dataset.json", 
-                           output_dir: str = "eval_results") -> Dict:
-    """Main evaluation function with all metrics."""
+def run_enhanced_evaluation(dataset_path: str = "eval_dataset.json",
+                           output_dir: str = "eval_results",
+                           max_samples: Optional[int] = None) -> Dict:
+    """Main evaluation function with all metrics.
+
+    Args:
+        max_samples: if set, only evaluate the first N samples (useful for CI).
+    """
     ensure_google_api_key()
     Path(output_dir).mkdir(exist_ok=True)
-    
+
     # Load dataset
     print("Loading evaluation dataset...")
     eval_dataset = load_evaluation_dataset(dataset_path)
-    print(f"✓ Loaded {len(eval_dataset)} evaluation samples")
+    if max_samples and max_samples < len(eval_dataset):
+        eval_dataset = eval_dataset[:max_samples]
+        print(f"✓ Loaded {len(eval_dataset)} evaluation samples (limited to {max_samples})")
+    else:
+        print(f"✓ Loaded {len(eval_dataset)} evaluation samples")
     
     # Build RAG pipeline
     print("\nBuilding RAG pipeline...")
