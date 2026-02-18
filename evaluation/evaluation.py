@@ -32,9 +32,10 @@ from ragas.metrics import (
     context_recall
 )
 
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
-from rag_agent.config import ensure_google_api_key, EMBEDDING_MODEL_NAME, LLM_MODEL_NAME
+from langchain_google_genai import ChatGoogleGenerativeAI
+from rag_agent.config import ensure_google_api_key, LLM_MODEL_NAME
 from rag_agent.graph_builder import build_graph
+from rag_agent.models import get_embeddings_model
 
 
 # ==================== Retrieval Metrics ====================
@@ -133,40 +134,52 @@ def run_rag_pipeline_with_metrics(question: str, graph) -> Dict:
 def prepare_evaluation_data_enhanced(eval_dataset: List[Dict], graph) -> Tuple[Dict, List[Dict]]:
     """
     Run RAG pipeline on all questions and collect both RAGAS data and performance metrics.
-    
+
+    RAGAS evaluation uses the gold ``context`` field from the dataset (offline eval)
+    so that generation quality is measured independently of the live retriever corpus.
+    Live retrieval metrics (Hit@k, Recall@k, MRR) are only computed when the
+    retrieved chunk_ids match the ``gold_doc_ids`` in the dataset.
+
     Returns:
-        - ragas_data: dict for RAGAS evaluation
+        - ragas_data: dict for RAGAS evaluation (uses gold contexts)
         - performance_data: list of dicts with latency, tokens, retrieval metrics
     """
     questions = []
     answers = []
-    contexts = []
+    gold_contexts = []   # from dataset -- used for RAGAS
     ground_truths = []
     performance_data = []
-    
+
     print("\n" + "="*60)
     print("RUNNING RAG PIPELINE ON EVALUATION DATASET")
     print("="*60)
-    
+
     for i, item in enumerate(eval_dataset, 1):
         question = item['question']
         ground_truth = item['ground_truth']
         gold_doc_ids = item.get('gold_doc_ids', [])
-        
+        # Gold contexts from dataset (offline eval -- independent of live corpus)
+        item_gold_ctx = item.get('context', [])
+        if isinstance(item_gold_ctx, list):
+            item_gold_ctx = [str(c) for c in item_gold_ctx if c]
+        else:
+            item_gold_ctx = [str(item_gold_ctx)] if item_gold_ctx else []
+        if not item_gold_ctx:
+            item_gold_ctx = ["No gold context provided"]
+
         print(f"\n[{i}/{len(eval_dataset)}] Processing question...")
         print(f"Q: {question[:80]}...")
-        
+
         try:
-            # Run RAG pipeline with metrics
+            # Run RAG pipeline for answer + latency/token/retrieval metrics
             metrics = run_rag_pipeline_with_metrics(question, graph)
-            
-            # Store for RAGAS
+
             questions.append(question)
             answers.append(metrics['answer'])
-            contexts.append(metrics['contexts'])
+            gold_contexts.append(item_gold_ctx)
             ground_truths.append(ground_truth)
-            
-            # Calculate retrieval metrics (if gold_doc_ids provided)
+
+            # Retrieval hard metrics: only meaningful when corpus matches gold_doc_ids
             retrieval_metrics = {}
             if gold_doc_ids and metrics['retrieved_doc_ids']:
                 for k in [1, 3, 5]:
@@ -179,8 +192,7 @@ def prepare_evaluation_data_enhanced(eval_dataset: List[Dict], graph) -> Tuple[D
                 retrieval_metrics['mrr'] = calculate_mrr(
                     metrics['retrieved_doc_ids'], gold_doc_ids
                 )
-            
-            # Store performance data
+
             perf = {
                 'question_id': i,
                 'question': question[:100],
@@ -190,17 +202,17 @@ def prepare_evaluation_data_enhanced(eval_dataset: List[Dict], graph) -> Tuple[D
                 **retrieval_metrics
             }
             performance_data.append(perf)
-            
+
             print(f"✓ Latency: {metrics['total_latency']:.2f}s")
             print(f"✓ Tokens: ~{metrics['estimated_tokens']}")
             if retrieval_metrics:
                 print(f"✓ MRR: {retrieval_metrics.get('mrr', 0):.3f}")
-            
+
         except Exception as e:
             print(f"✗ Error: {e}")
             questions.append(question)
             answers.append(f"Error: {str(e)}")
-            contexts.append(["Error retrieving context"])
+            gold_contexts.append(item_gold_ctx)
             ground_truths.append(ground_truth)
             performance_data.append({
                 'question_id': i,
@@ -209,14 +221,14 @@ def prepare_evaluation_data_enhanced(eval_dataset: List[Dict], graph) -> Tuple[D
                 'estimated_tokens': 0,
                 'success': False
             })
-    
+
     ragas_data = {
-        'question': questions,
-        'answer': answers,
-        'contexts': contexts,
-        'ground_truth': ground_truths
+        'question': [str(q) for q in questions],
+        'answer': [str(a) for a in answers],
+        'contexts': gold_contexts,   # List[List[str]] -- always uniform type
+        'ground_truth': [str(g) for g in ground_truths],
     }
-    
+
     return ragas_data, performance_data
 
 
@@ -280,7 +292,7 @@ def run_enhanced_evaluation(dataset_path: str = "eval_dataset.json",
     
     dataset = Dataset.from_dict(ragas_data)
     llm = ChatGoogleGenerativeAI(model=LLM_MODEL_NAME, temperature=0)
-    embeddings = GoogleGenerativeAIEmbeddings(model=EMBEDDING_MODEL_NAME)
+    embeddings = get_embeddings_model()  # 768-dim DimensionReducedEmbeddings
     
     metrics = [faithfulness, answer_relevancy, context_precision, context_recall]
     
